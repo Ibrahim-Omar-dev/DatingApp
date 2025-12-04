@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+input:focus{
+    outline: none;
+    border: none;
+}
