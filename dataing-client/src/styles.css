@@ -5,3 +5,8 @@ input:focus{
     outline: none;
     border: none;
 }
+html,
+body {
+    background-color: white;
+    color: black;
+}

@@ -1,9 +1,10 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
-import { UserCreds } from '../types/UserCreds';
-import { RegisterCreds } from '../types/RegisterCreds';
-import { LoginCreds } from '../types/LoginCreds';
+import { UserCreds } from '../../types/UserCreds';
+import { RegisterCreds } from '../../types/RegisterCreds';
+import { LoginCreds } from '../../types/LoginCreds';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { LoginCreds } from '../types/LoginCreds';
 export class AccountService {
 
   private http = inject(HttpClient);
+  private router = inject(Router);
   private baseUrl = "https://localhost:7133/api/account/";
   currentUser = signal<any>(null);
 
@@ -37,6 +39,7 @@ export class AccountService {
   logout() {
     localStorage.removeItem('user');
     this.currentUser.set(null);
+
   }
   GetcurrentUser(user: UserCreds)
   {

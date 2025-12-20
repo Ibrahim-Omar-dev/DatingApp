@@ -1,11 +1,10 @@
 import { Component, Input, signal } from '@angular/core';
-import { Register } from "../accout/register/register";      // Make sure this is a component
-import { UserCreds } from '../../types/UserCreds';
+import { Register } from "../accout/register/register";    
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Register],        // Must be a standalone component
+  imports: [Register],      
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
