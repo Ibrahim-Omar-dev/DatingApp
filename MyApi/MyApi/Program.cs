@@ -7,6 +7,7 @@ using MyApi.IServices;
 using MyApi.Servicesdot;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using MyApi.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ExceptionMiddleWare>();
 builder.Services.AddScoped<ITokenServices, TokenServices>();
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 
@@ -58,7 +60,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseDeveloperExceptionPage();
+app.UseMiddleware<ExceptionMiddleWare>();
 app.UseCors("DevAllowAngular");
 
 app.UseAuthentication();

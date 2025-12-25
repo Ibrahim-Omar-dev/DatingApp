@@ -5,20 +5,25 @@ import { MemberDetails } from '../features/members/member-details/member-details
 import { Home } from '../features/home/home';
 import { List } from '../features/list/list';
 import { authGuard } from '../guards/auth-guard';
+import { TestErrors } from '../features/test-errors/test-errors';
+import { NotFound } from '../shared/not-found/not-found';
+import { ServerError } from '../shared/server-error/server-error';
 
 export const routes: Routes = [
-  { path: '', component: Home }, // Home page accessible to everyone
-  { path: 'home', component: Home }, // Alternative route for home
+  { path: '', component: Home },
+  { path: 'home', component: Home }, 
   {
     path: '',
     runGuardsAndResolvers: 'always',
     canActivate: [authGuard],
     children: [
-      { path: 'members', component: MemberList }, // Added members list route
+      { path: 'members', component: MemberList }, 
       { path: 'members/:id', component: MemberDetails },
       { path: 'messages', component: Messages },
       { path: 'lists', component: List },
     ]
   },
-  { path: '**', redirectTo: 'home', pathMatch: 'full' } // Wildcard route for 404
+  {path:"Errors",component:TestErrors},
+  {path:"server-error",component:ServerError},
+  { path: '**', component:NotFound } 
 ];

@@ -4,16 +4,17 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { filter, lastValueFrom } from 'rxjs';
 import { InitServices } from '../core/init-services';
+import { errorInterceptorInterceptor } from './error-interceptor-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes,withViewTransitions()),
-    provideHttpClient(),
+    provideHttpClient(withInterceptors([errorInterceptorInterceptor])),
     provideAnimations(),
     provideToastr({
       timeOut: 3000,

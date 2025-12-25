@@ -1,0 +1,26 @@
+<div class="card flex items-center p-10 gap-3 shadow-2xl w-full mx-auto rounded-xl flex-col">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke-width="1.5"
+    stroke="currentColor"
+    class="size-32 text-error"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" d="..." />
+  </svg>
+
+  <h1 class="card-title text-4xl justify-center font-bold">Server Error</h1>
+
+  <div class="card-body text-xl text-center">
+    {{ error?.message || 'Unexpected server error' }}
+  </div>
+
+  <button class="btn btn-primary" (click)="DetailsToggle()">Details</button>
+
+  @if (showDetails) {
+  <div>
+    {{ error?.details }}
+  </div>
+  }
+</div>
