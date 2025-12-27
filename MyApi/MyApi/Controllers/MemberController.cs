@@ -25,7 +25,7 @@ namespace MyApi.Controllers
         [HttpGet("GetAllMembers")]
         public async Task<IActionResult> GetAllMembers()
         {
-            var users = await _unitOfWork.UserRepo.GetAllAsync();
+            var users = await _unitOfWork.MemberRepo.GetAllAsync();
             var userDto = _mapper.Map<IEnumerable<UserDto>>(users);
             return Ok(userDto);
         }
@@ -40,6 +40,22 @@ namespace MyApi.Controllers
             }
             var userDto = _mapper.Map<UserDto>(user);
             return Ok(userDto);
+        }
+        public async Task<IActionResult> GetMemberById(string id)
+        {
+            var user = await _unitOfWork.MemberRepo.Get(m => m.AppUserId == id);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            var userDto = _mapper.Map<UserDto>(user);
+            return Ok(user);
+        }
+        [HttpGet("{id}/photos")]
+        public async Task<IActionResult> GetPhotosFromMemberId(string memberId)
+        {
+            var photos = await _unitOfWork.MemberRepo.GetPhotosFromMemberIdAsync(memberId);
+            return Ok(photos);
         }
     }
 }

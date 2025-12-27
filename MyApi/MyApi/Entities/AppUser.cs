@@ -1,17 +1,20 @@
+
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using MyApi.Entities;
 
-namespace MyApi.Entities
+public class AppUser
 {
-    public class AppUser
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Key]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
 
-        public string Id { get; set; }
-        public required string UserName { get; set; }
-        public required string Email { get; set; }
-        public required byte[] PasswordHash { get; set; }
-        public required byte[] PasswordSalt { get; set; }
-    }
+    public required string UserName { get; set; }
+
+    public string? imageUrl { get; set; }
+
+    public required string Email { get; set; }
+
+    public required byte[] PasswordHash { get; set; }
+
+    public required byte[] PasswordSalt { get; set; }
+    public Member? Member { get; set; }
 }

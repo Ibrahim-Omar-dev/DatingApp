@@ -1,8 +1,6 @@
 using System.Net;
 using System.Text.Json;
-using Microsoft.AspNetCore.Mvc;
 using MyApi.Errors;
-using SQLitePCL;
 
 namespace MyApi.MiddleWare
 {
